@@ -1,9 +1,10 @@
-name: ESTP Monitor
+name: ESTP Test Monitor
 
 # Trigger: schedule + manual run
 on:
-  schedule:
-    - cron: "0 8 * * 1"  # Every Monday at 08:00 UTC
+  # Stop autorun and keep only the manual run
+  # schedule:
+  #  - cron: "0 8 * * 1"  # Every Monday at 08:00 UTC
   workflow_dispatch:     # Allows manual run from GitHub UI
 
 jobs:
@@ -23,8 +24,8 @@ jobs:
       # 4. Run your R script
       - name: Run ESTP Monitor
         env:
-          ESTPSLACK_WEBHOOK_URL: ${{ secrets.ESTPSLACK_WEBHOOK_URL }}
+          ESTPSLACK_WEBHOOK_URL : ${{ secrets.ESTPSLACK_WEBHOOK_URL }}
           #EMAIL_USER: ${{ secrets.EMAIL_USER }}
           #EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           #EMAIL_TO: ${{ secrets.EMAIL_TO }}
-        run: Rscript estp_monitor.R
+        run: Rscript estp-notify-slack-simple.R
