@@ -1,4 +1,4 @@
-name: ESTP Monitor
+ame: ESTP Monitor
 
 # Trigger: schedule + manual run
 on:
@@ -19,8 +19,7 @@ jobs:
 
       # 3. Install required R packages
       - name: Install packages
-        run: |
-        Rscript -e 'install.packages(c("rvest","dplyr","stringr","httr","glue","blastula"))'
+        run: Rscript -e 'install.packages(c("rvest","dplyr","stringr","httr","glue","blastula"))'
       # 4. Run your R script
       - name: Run ESTP Monitor
         env:
