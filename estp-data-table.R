@@ -6,7 +6,8 @@ library(stringr)
 url <- "https://cros.ec.europa.eu/book-page/estp-programme-2026"
 
 # Read page
-page <- read_html(url)
+page <- tryCatch(read_html(url), 
+                 error = function(e) stop("Failed to read page: ", e$message))
 
 # Extract table (3 columns)
 tbl_raw <- page %>%
