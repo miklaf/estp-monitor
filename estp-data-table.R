@@ -35,16 +35,16 @@ print(estp_df)
 # Compare with existing data
 # -----------------------------
 
-# Read existing estp_data
-existing_estp_data <- "estp_data.csv"
+# Read existing estp_data file
+existing_estp_data_file <- "estp_data.csv"
 
 
 if (!file.exists(existing_estp_data)) {
-  write.csv(estp_df, existing_estp_data, row.names = FALSE)
+  write.csv(estp_df, existing_estp_data_file, row.names = FALSE)
   message("New data file created")
   quit(save = "ues")
 } else {
-  estp_existing_df <- read.csv(existing_estp_data)
+  estp_existing_df <- read.csv(existing_estp_data_file)
   new_programs_df <- anti_join(estp_df, estp_existing_df)
 }
 
@@ -52,9 +52,11 @@ if (!file.exists(existing_estp_data)) {
 if (nrow(new_programs_df) == 0) {
   message("No differences found")
 } else {
+  # notify via Slack
   source("estp-notify-slack.R")
-  message("New rows detected!")
-  write.csv(estp_df, existing_estp_data, row.names = FALSE)
-  msg <- paste0(nrow(new_programs_df), " New seminars added!")
+  
+  # update the existing file
+  write.csv(estp_df, existing_estp_data_file, row.names = FALSE)
+  msg <- paste0(nrow(new_programs_df), " New seminar(s) added!")
   message(msg)
 }
