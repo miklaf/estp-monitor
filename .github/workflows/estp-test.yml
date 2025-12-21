@@ -23,7 +23,7 @@ jobs:
       # 4. Run your R script
       - name: Run ESTP Monitor
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ESTPSLACK_WEBHOOK_URL }}
+          ESTPSLACK_WEBHOOK_URL : ${{ secrets.ESTPSLACK_WEBHOOK_URL }}
           #EMAIL_USER: ${{ secrets.EMAIL_USER }}
           #EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           #EMAIL_TO: ${{ secrets.EMAIL_TO }}
