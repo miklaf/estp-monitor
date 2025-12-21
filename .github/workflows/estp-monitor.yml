@@ -1,4 +1,4 @@
-ame: ESTP Monitor
+Name: ESTP Monitor
 
 # Trigger: schedule + manual run
 on:
