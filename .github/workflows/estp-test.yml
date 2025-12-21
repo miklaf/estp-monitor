@@ -2,8 +2,9 @@ name: ESTP Test Monitor
 
 # Trigger: schedule + manual run
 on:
-  schedule:
-    - cron: "0 8 * * 1"  # Every Monday at 08:00 UTC
+  # Stop autorun and keep only the manual run
+  # schedule:
+  #  - cron: "0 8 * * 1"  # Every Monday at 08:00 UTC
   workflow_dispatch:     # Allows manual run from GitHub UI
 
 jobs:
