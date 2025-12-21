@@ -1,6 +1,8 @@
 library(dplyr)
 library(glue)
 
+library(httr)
+
 # Example: new programs
 # new_programs_df <- estp_df[1:2, ]  # demo
 slack_webhook_url <- Sys.getenv("ESTPSLACK_WEBHOOK_URL")
