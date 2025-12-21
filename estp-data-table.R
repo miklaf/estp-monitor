@@ -39,7 +39,7 @@ print(estp_df)
 existing_estp_data_file <- "estp_data.csv"
 
 
-if (!file.exists(existing_estp_data)) {
+if (!file.exists(existing_estp_data_file)) {
   write.csv(estp_df, existing_estp_data_file, row.names = FALSE)
   message("New data file created")
   quit(save = "ues")
