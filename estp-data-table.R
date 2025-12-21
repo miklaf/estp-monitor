@@ -29,3 +29,32 @@ estp_df <- tbl_raw %>%
   select(`Dates (2026)`, Duration, Title, Venue, Deadline, Organizer)
 
 print(estp_df)
+
+
+# -----------------------------
+# Compare with existing data
+# -----------------------------
+
+# Read existing estp_data
+existing_estp_data <- "estp_data.csv"
+
+
+if (!file.exists(existing_estp_data)) {
+  write.csv(estp_df, existing_estp_data, row.names = FALSE)
+  message("New data file created")
+  quit(save = "ues")
+} else {
+  estp_existing_df <- read.csv(existing_estp_data)
+  new_programs_df <- anti_join(estp_df, estp_existing_df)
+}
+
+
+if (nrow(new_programs_df) == 0) {
+  message("No differences found")
+} else {
+  source("estp-notify-slack.R")
+  message("New rows detected!")
+  write.csv(estp_df, existing_estp_data, row.names = FALSE)
+  msg <- paste0(nrow(new_programs_df), " New seminars added!")
+  message(msg)
+}
