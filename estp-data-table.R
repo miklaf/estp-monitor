@@ -20,14 +20,15 @@ colnames(tbl_raw) <- c("Col1", "Title", "Venue")
 # Parse Col1 into Dates, Duration, Deadline
 estp_df <- tbl_raw %>%
   mutate(
-    `Dates (2026)` = str_extract(Col1, "^.*?(?=\\d+\\s*days)"),
+    Dates_2026 = str_extract(Col1, "^.*?(?=\\d+\\s*days)"),
     Duration = str_extract(Col1, "\\d+\\s*days"),
-    Deadline = str_extract(Col1, "(?<=DEADLINE: )\\d{2}\\.\\d{2}\\.\\d{2,4}")
+    Deadline = str_extract(Col1, "(?<=DEADLINE: )\\d{2}\\.\\d{2}\\.\\d{2,4}"),
+    Venue_new = str_extract(Venue, "^.*?(?=\\s+ORGANIZER:)"),
+    Venue_new = str_extract(Venue, "^.*?(?=\\s+ORGANIZER:)"),
+    #Organizer = str_extract(Venue, "(?<=ORGANIZER:\\s+).*$")
+    Organizer = str_remove(Venue, "^.*ORGANIZER:\\s+")
   ) %>%
-  mutate(
-    Organizer = "Eurostat"
-  ) %>%
-  select(`Dates (2026)`, Duration, Title, Venue, Deadline, Organizer)
+  select(Dates_2026, Duration, Title, Venue, Deadline, Organizer)
 
 print(estp_df)
 
