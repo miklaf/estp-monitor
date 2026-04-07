@@ -31,9 +31,9 @@ estp_df <- tbl_raw %>%
 print(estp_df)
 
 
-# -----------------------------
+# ----------------------------
 # Compare with existing data
-# -----------------------------
+# ----------------------------
 
 # Read existing estp_data file
 existing_estp_data_file <- "estp_data.csv"
