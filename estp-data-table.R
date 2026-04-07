@@ -15,19 +15,18 @@ tbl_raw <- page %>%
   html_table(fill = TRUE) %>%
   mutate(across(everything(), str_squish))
 
-colnames(tbl_raw) <- c("Col1", "Title", "Venue")
+colnames(tbl_raw) <- c("Col1", "Title", "Venue_Organizer")
 
 # Parse Col1 into Dates, Duration, Deadline
 estp_df <- tbl_raw %>%
   mutate(
-    `Dates (2026)` = str_extract(Col1, "^.*?(?=\\d+\\s*days)"),
+    Dates_2026 = str_extract(Col1, "^.*?(?=\\d+\\s*days)"),
     Duration = str_extract(Col1, "\\d+\\s*days"),
-    Deadline = str_extract(Col1, "(?<=DEADLINE: )\\d{2}\\.\\d{2}\\.\\d{2,4}")
+    Deadline = str_extract(Col1, "(?<=DEADLINE: )\\d{2}\\.\\d{2}\\.\\d{2,4}"),
+    Venue = str_extract(Venue_Organizer, "^.+?(?=ORGANIZER)"),
+    Organizer = str_remove(Venue_Organizer, "^.*ORGANIZER:\\s+")
   ) %>%
-  mutate(
-    Organizer = "Eurostat"
-  ) %>%
-  select(`Dates (2026)`, Duration, Title, Venue, Deadline, Organizer)
+  select(Dates_2026, Duration, Title, Venue, Deadline, Organizer)
 
 print(estp_df)
 

@@ -12,7 +12,7 @@ msg <- paste(
   "*📢 New ESTP Programs Added:*\n",
   paste(
     apply(new_programs_df, 1, function(r) {
-      glue("• *{r['Title']}* — {r['Dates (2026)']} ({r['Duration']}) at {r['Venue']} (Deadline: {r['Deadline']})")
+      glue("• *{r['Title']}* — {r['Dates_2026']} ({r['Duration']}) at {r['Venue']} (Deadline: {r['Deadline']})")
     }),
     collapse = "\n"
   ),
