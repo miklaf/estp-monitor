@@ -59,4 +59,5 @@ if (nrow(new_programs_df) == 0) {
   write.csv(estp_df, existing_estp_data_file, row.names = FALSE)
   msg <- paste0(nrow(new_programs_df), " New seminar(s) added!")
   message(msg)
+  message(new_programs_df)
 }
